@@ -2,6 +2,8 @@ export const CONTEXT = 'http://localhost:8080/mobile'
 
 //用户登录
 export const LOGIN = CONTEXT + '/auth/login'
+
+export const PARAMS = CONTEXT + "/workInfo/params"
 //工单列表
 export const WORK_INFO_LIST = CONTEXT + '/workInfo/list'
 

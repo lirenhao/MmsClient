@@ -22,7 +22,7 @@
       ExtInfo
     },
     created: function () {
-      api.getReceiptList()
+      api.getWorkReList()
         .then(data => {
           this.list = data
           this.results = data
@@ -41,15 +41,12 @@
           style: 'primary',
           text: '回执',
           onButtonClick: () => {
-            api.getWorkInfoShow(item.id)
-              .then(data => {
-                this.$router.push({
-                  name: 'show', params: {
-                    info: data,
-                    type: 'audit'
-                  }
-                })
-              })
+            this.$router.push({
+              name: 'receipt', params: {
+                info: item,
+                type: 'receipt'
+              }
+            })
           }
         }
         const showButton = {
@@ -61,7 +58,7 @@
                 this.$router.push({
                   name: 'allocate', params: {
                     info: data,
-                    type: 'allocate'
+                    type: 'show'
                   }
                 })
               })

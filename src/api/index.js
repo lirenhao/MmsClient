@@ -3,6 +3,7 @@ import axios from 'axios'
 import store from '../vuex/store'
 import router from '../router'
 import * as consts from './constants'
+import localforage from '../store/localforage'
 
 axios.interceptors.request.use(
   config => {
@@ -85,6 +86,28 @@ export default {
         })
       })
   },
+  getParams: function () {
+    return axios.post(consts.PARAMS)
+      .then((resp) => {
+        const data = resp.data
+        if (data.respCode === '00') {
+          localforage().setItem('params', data.content)
+            .then(() => {
+              Vue.$vux.toast.show({
+                type: 'success',
+                position: 'default',
+                text: '参数更新完成'
+              })
+            })
+        } else {
+          Vue.$vux.toast.show({
+            type: 'warn',
+            position: 'default',
+            text: data.respMsg
+          })
+        }
+      })
+  },
   getWorkInfoList: function () {
     return axios.post(consts.WORK_INFO_LIST)
       .then((resp) => {
@@ -161,7 +184,7 @@ export default {
         console.log(resp)
       })
   },
-  getReceiptList: function () {
+  getWorkReList: function () {
     return axios.post(consts.WORK_RECEIPT_LIST)
       .then((resp) => {
         console.log(resp)

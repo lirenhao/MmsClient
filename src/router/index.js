@@ -6,6 +6,7 @@ import AlList from '../views/allocate/list'
 import AlShow from '../views/allocate/show'
 import Allocate from '../views/allocate/allocate'
 import ReList from '../views/receipt/list'
+import Receipt from '../views/receipt/receipt'
 
 Vue.use(Router)
 
@@ -73,6 +74,17 @@ export default new Router({
         title: '回执列表',
         showBack: true
       }
-    }
+    },
+    {
+      path: '/receipt',
+      name: 'receipt',
+      component: Receipt,
+      props: true,
+      meta: {
+        isShowNav: true,
+        title: '回执',
+        showBack: true
+      }
+    },
   ]
 })
