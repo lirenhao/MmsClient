@@ -245,10 +245,25 @@ export default {
   },
   saveReceipt: function (params, images = [], devNos = {}) {
     const id = window.localStorage.id
-    localforage(id).getItem('receipt').then(ld => {
-      ld = ld || {}
-      ld[params.workId + params.termNo] = {params, images, devNos}
-      localforage(id).setItem('receipt', ld)
-    })
+    localforage(id).getItem('receipt')
+      .then(ld => {
+        ld = ld || {}
+        ld[params.workId + params.termNo] = {params, images, devNos}
+        localforage(id).setItem('receipt', ld)
+      })
+      .then(() => {
+        Vue.$vux.toast.show({
+          type: 'success',
+          position: 'default',
+          text: '保存成功'
+        })
+      })
+      .catch(err => {
+        Vue.$vux.toast.show({
+          type: 'success',
+          position: 'default',
+          text: '保存失败'
+        })
+      })
   }
 }

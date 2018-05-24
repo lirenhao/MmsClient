@@ -52,7 +52,7 @@
           this.completeDate = this.init.params.completeDate || now.getFullYear() + '-' + month + '-' + day
         }
         if (this.init.images) {
-          this.images = init.images
+          this.images = this.init.images
         }
       })
     },

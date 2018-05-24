@@ -54,7 +54,15 @@
           .filter(item => (item.params.merNo + item.params.termNo + item.params.addr).indexOf(value) !== -1)
       },
       showInfo: function (value) {
-        console.log(value)
+        this.$router.push({
+          name: 'receipt', params: {
+            info: {
+              ...value.params,
+              details: Object.keys(value.devNos).map(key => ({devType: key}))
+            },
+            type: 'show'
+          }
+        })
       }
     }
   }
