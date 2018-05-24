@@ -56,7 +56,7 @@
         // 移动端仅支持单文件上传
         const reader = new FileReader();
         reader.onload = (e) => {
-          this.images.push([e.target.result]);
+          this.images.push(e.target.result);
         }
         reader.readAsDataURL(event.target.files[0])
       },

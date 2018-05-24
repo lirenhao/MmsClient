@@ -13,20 +13,27 @@
       <uploader :images="images" :max="4"/>
     </group>
     <group>
-      <x-button type="primary" @click.native="buttonClick">提交</x-button>
+      <flexbox>
+        <flexbox-item v-if="isSave">
+          <x-button @click.native="buttonSave">保存</x-button>
+        </flexbox-item>
+        <flexbox-item>
+          <x-button @click.native="buttonSubmit">提交</x-button>
+        </flexbox-item>
+      </flexbox>
     </group>
   </div>
 </template>
 
 <script>
-  import {Group, Cell, Selector, Datetime, XButton} from 'vux'
+  import {Group, Cell, Selector, Datetime, XButton, Flexbox, FlexboxItem} from 'vux'
   import Uploader from './Uploader'
   import localforage from '../store/localforage'
 
   export default {
     name: "Inspect",
     components: {
-      Group, Cell, Selector, Datetime, Uploader, XButton
+      Group, Cell, Selector, Datetime, Uploader, XButton, Flexbox, FlexboxItem
     },
     created: function () {
       let now = new Date()
@@ -38,6 +45,15 @@
       localforage().getItem('params').then(params => {
         this.insResults = params.insResults
         this.excReasons = params.excReasons
+        if (this.init.params) {
+          this.inspectionResult = this.init.params.inspectionResult || ''
+          this.anomalyReason = this.init.params.anomalyReason || ''
+          this.isAddress = this.init.params.isAddress || '0'
+          this.completeDate = this.init.params.completeDate || now.getFullYear() + '-' + month + '-' + day
+        }
+        if (this.init.images) {
+          this.images = init.images
+        }
       })
     },
     data: function () {
@@ -52,19 +68,22 @@
       }
     },
     props: {
-      handler: {
-        type: Function,
-        required: true
+      info: Object,
+      init: Object,
+      submit: Function,
+      save: Function,
+      isSave: {
+        type: Boolean,
+        default: true
       }
     },
     methods: {
-      buttonClick() {
+      validData(cb) {
         const params = {}
         params.inspectionResult = this.inspectionResult
         params.anomalyReason = this.anomalyReason
         params.isAddress = this.isAddress
         params.completeDate = this.completeDate
-        params.images = this.images
         if (params.inspectionResult === '') {
           this.$vux.toast.show({
             type: 'warn',
@@ -72,8 +91,14 @@
             text: '巡检结果不能为空'
           })
         } else {
-          this.handler(params)
+          cb(params, this.images)
         }
+      },
+      buttonSave() {
+        this.validData(this.save)
+      },
+      buttonSubmit() {
+        this.validData(this.submit)
       }
     }
   }

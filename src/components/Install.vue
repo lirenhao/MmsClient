@@ -16,20 +16,27 @@
       <uploader :images="images" :max="4"/>
     </group>
     <group>
-      <x-button type="primary" @click.native="buttonClick">提交</x-button>
+      <flexbox :gutter="0">
+        <flexbox-item v-if="isSave">
+          <x-button @click.native="buttonSave">保存</x-button>
+        </flexbox-item>
+        <flexbox-item>
+          <x-button @click.native="buttonSubmit">提交</x-button>
+        </flexbox-item>
+      </flexbox>
     </group>
   </div>
 </template>
 
 <script>
-  import {Group, Cell, Selector, Datetime, XInput, XButton} from 'vux'
+  import {Group, Cell, Selector, Datetime, XInput, XButton, Flexbox, FlexboxItem} from 'vux'
   import Uploader from './Uploader'
   import localforage from '../store/localforage'
 
   export default {
     name: "Install",
     components: {
-      Group, Cell, Selector, Datetime, Uploader, XInput, XButton
+      Group, Cell, Selector, Datetime, Uploader, XInput, XButton, Flexbox, FlexboxItem
     },
     created: function () {
       let now = new Date()
@@ -38,12 +45,24 @@
       if (month < 10) month = '0' + month
       if (day < 10) day = '0' + day
       this.completeDate = now.getFullYear() + '-' + month + '-' + day
-      this.info.details.forEach(item => {
-        this.devNos[item.devType] = item.devNo
-      })
       localforage().getItem('params').then(params => {
         this.programs = params.programs
         this.devTypes = params.devTypes
+        if (this.init.params) {
+          this.isAddress = this.init.params.isAddress || '0'
+          this.completeDate = this.init.params.completeDate || now.getFullYear() + '-' + month + '-' + day
+          this.programName = this.init.params.programName || ''
+        }
+        if (this.init.images) {
+          this.images = this.init.images || []
+        }
+        if (this.init.devNos) {
+          this.devNos = this.init.devNos || {}
+        } else {
+          this.info.details.forEach(item => {
+            this.devNos[item.devType] = item.devNo
+          })
+        }
       })
     },
     data: function () {
@@ -59,9 +78,12 @@
     },
     props: {
       info: Object,
-      handler: {
-        type: Function,
-        required: true
+      init: Object,
+      submit: Function,
+      save: Function,
+      isSave: {
+        type: Boolean,
+        default: true
       }
     },
     methods: {
@@ -73,14 +95,12 @@
         })
         return typeName
       },
-      buttonClick() {
-        // TODO 验证
+      validData(cb) {
+        // 验证
         const params = {}
         params.isAddress = this.isAddress
         params.completeDate = this.completeDate
         params.programName = this.programName
-        params.devNos = this.devNos
-        params.images = this.images
         let result = true
         if (params.programName === '') {
           this.$vux.toast.show({
@@ -90,7 +110,7 @@
           })
           result = false
         }
-        const denNos = Object.values(params.devNos)
+        const denNos = Object.values(this.devNos)
         if (result && denNos.filter(v => v).length < denNos.length) {
           this.$vux.toast.show({
             type: 'warn',
@@ -100,8 +120,14 @@
           result = false
         }
         if (result) {
-          this.handler(params)
+          cb(params, this.images, this.devNos)
         }
+      },
+      buttonSave() {
+        this.validData(this.save)
+      },
+      buttonSubmit() {
+        this.validData(this.submit)
       }
     }
   }

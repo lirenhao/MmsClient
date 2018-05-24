@@ -14,19 +14,26 @@
       <uploader :images="images" :max="4"/>
     </group>
     <group>
-      <x-button type="primary" @click.native="buttonClick">提交</x-button>
+      <flexbox>
+        <flexbox-item v-if="isSave">
+          <x-button @click.native="buttonClick">保存</x-button>
+        </flexbox-item>
+        <flexbox-item>
+          <x-button @click.native="buttonClick">提交</x-button>
+        </flexbox-item>
+      </flexbox>
     </group>
   </div>
 </template>
 
 <script>
-  import {Group, Cell, Selector, Datetime, XInput, XButton} from 'vux'
+  import {Group, Cell, Selector, Datetime, XInput, XButton, Flexbox, FlexboxItem} from 'vux'
   import Uploader from './Uploader'
 
   export default {
     name: "Uninstall",
     components: {
-      Group, Cell, Selector, Datetime, Uploader, XInput, XButton
+      Group, Cell, Selector, Datetime, Uploader, XInput, XButton, Flexbox, FlexboxItem
     },
     created: function () {
       let now = new Date()
@@ -35,6 +42,13 @@
       if (month < 10) month = '0' + month
       if (day < 10) day = '0' + day
       this.completeDate = now.getFullYear() + '-' + month + '-' + day
+      if (this.init.params) {
+        this.isAddress = this.init.params.isAddress || '0'
+        this.completeDate = this.init.params.completeDate || now.getFullYear() + '-' + month + '-' + day
+      }
+      if (this.init.images) {
+        this.images = this.init.images
+      }
     },
     data: function () {
       return {
@@ -45,9 +59,12 @@
     },
     props: {
       info: Object,
-      handler: {
-        type: Function,
-        required: true
+      init: Object,
+      submit: Function,
+      save: Function,
+      isSave: {
+        type: Boolean,
+        default: true
       }
     },
     methods: {
@@ -59,8 +76,17 @@
         })
         return typeName
       },
-      buttonClick() {
-        this.handler(this.$data)
+      validData(cb) {
+        const params = {}
+        params.isAddress = this.isAddress
+        params.completeDate = this.completeDate
+        cb(params, this.images)
+      },
+      buttonSave() {
+        this.validData(this.save)
+      },
+      buttonSubmit() {
+        this.validData(this.submit)
       }
     }
   }

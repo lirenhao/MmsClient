@@ -6,11 +6,11 @@
       <!--<cell-form-preview list="list"></cell-form-preview>-->
     </group>
     <install v-if="info.eventsId === '0' || info.eventsId === '1'"
-             :submit="submit" :save="save" :info="info" :init="{}"/>
+             :submit="submit" :save="save" :info="info" :init="init"/>
     <uninstall v-if="info.eventsId === '2'"
-               :submit="submit" :save="save" :info="info" :init="{}"/>
+               :submit="submit" :save="save" :info="info" :init="init"/>
     <inspect v-if="info.eventsId === '3' || info.eventsId === '4' || info.eventsId === '5'"
-             :submit="submit" :save="save" :info="info" :init="{}"/>
+             :submit="submit" :save="save" :info="info" :init="init"/>
   </div>
 </template>
 
@@ -21,15 +21,23 @@
   import Inspect from '../../components/Inspect'
   import * as consts from '../../constants'
   import api from '../../api'
+  import localforage from '../../store/localforage'
 
   export default {
     name: "receipt",
     components: {
       XHeader, Group, Cell, CellFormPreview, Install, Uninstall, Inspect
     },
-    props: ['info', 'init'],
+    props: ['info'],
+    created: function () {
+      localforage(window.localStorage.id).getItem('receipt')
+        .then(receipt => {
+          this.init = receipt[this.info.workId + this.info.termNo] || {}
+        })
+    },
     data: function () {
       return {
+        init: {},
         title: consts.eventType[this.info.eventsId]
       }
     },

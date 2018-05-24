@@ -46,6 +46,17 @@ axios.interceptors.response.use(
     return Promise.reject(err)
   })
 
+const dataURItoBlob = (dataURI) => {
+  const byteString = atob(dataURI.split(',')[1])
+  const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+  const ab = new ArrayBuffer(byteString.length)
+  const ia = new Uint8Array(ab)
+  for (let i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i)
+  }
+  return new Blob([ab], {type: mimeString})
+}
+
 export default {
   login: function (userName, passWord) {
     const params = new URLSearchParams()
@@ -56,10 +67,12 @@ export default {
       .then((resp) => {
         if (resp.status === 200) {
           if (resp.data.respCode === '00') {
-            window.localStorage.setItem('token', resp.data.content)
+            window.localStorage.setItem('id', resp.data.content.id)
+            window.localStorage.setItem('token', resp.data.content.token)
             router.push({
               name: 'home'
             })
+            this.getParams()
           } else {
             store.commit('UPDATE_LOADING', false)
             Vue.$vux.toast.show({
@@ -199,5 +212,43 @@ export default {
           })
         }
       })
+  },
+  workReceipt: function (data, images = [], devNos = {}) {
+    const params = new FormData();
+    Object.keys(data).forEach(key => {
+      params.append(key, data[key])
+    })
+    images.forEach((img, index) => {
+      params.append('images', dataURItoBlob(img), data.termNo + '-' + index)
+    })
+    Object.keys(devNos).forEach(key => {
+      params.append('devTypes', key)
+      params.append('devNos', devNos[key])
+    })
+    return axios.post(consts.WORK_INFO_RECEIPT, params)
+      .then(resp => {
+        console.log(resp)
+        if (resp.data.respCode === '00') {
+          Vue.$vux.toast.show({
+            type: 'success',
+            position: 'default',
+            text: '回执成功'
+          })
+        } else {
+          Vue.$vux.toast.show({
+            type: 'warn',
+            position: 'default',
+            text: resp.data.respMsg
+          })
+        }
+      })
+  },
+  saveReceipt: function (params, images = [], devNos = {}) {
+    const id = window.localStorage.id
+    localforage(id).getItem('receipt').then(ld => {
+      ld = ld || {}
+      ld[params.workId + params.termNo] = {params, images, devNos}
+      localforage(id).setItem('receipt', ld)
+    })
   }
 }
