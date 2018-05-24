@@ -6,9 +6,9 @@
       <datetime v-model="completeDate" format="YYYY-MM-DD" title="完成时间"/>
     </group>
     <group v-for="(item, index) in info.details" :key="index" :title="getDevTypeName(item.devType)">
-      <x-input title="设备序列号" v-model="item.devNo" readonly>
+      <cell :value="item.devNo">
         <x-icon slot="label" style="padding-right:10px;display:block;" type="ios-barcode-outline" size="24"/>
-      </x-input>
+      </cell>
     </group>
     <group title="回执图片">
       <uploader :images="images" :max="4"/>
@@ -60,7 +60,6 @@
         return typeName
       },
       buttonClick() {
-        // TODO 验证
         this.handler(this.$data)
       }
     }

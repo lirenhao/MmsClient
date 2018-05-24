@@ -59,8 +59,21 @@
     },
     methods: {
       buttonClick() {
-        // TODO 验证
-        this.handler(this.$data)
+        const params = {}
+        params.inspectionResult = this.inspectionResult
+        params.anomalyReason = this.anomalyReason
+        params.isAddress = this.isAddress
+        params.completeDate = this.completeDate
+        params.images = this.images
+        if (params.inspectionResult === '') {
+          this.$vux.toast.show({
+            type: 'warn',
+            position: 'default',
+            text: '巡检结果不能为空'
+          })
+        } else {
+          this.handler(params)
+        }
       }
     }
   }

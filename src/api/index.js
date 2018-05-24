@@ -52,7 +52,7 @@ export default {
     params.append('loginName', userName)
     params.append('pwd', passWord)
     store.commit('UPDATE_LOADING', true)
-    Vue.http.post(consts.LOGIN, params)
+    axios.post(consts.LOGIN, params)
       .then((resp) => {
         if (resp.status === 200) {
           if (resp.data.respCode === '00') {

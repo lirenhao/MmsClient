@@ -3,13 +3,10 @@
     <x-header style="background-color:#F33A55;" title="首页" :left-options="{showBack: false}"></x-header>
     <group>
       <cell title="工单管理" link="/list">
-        <x-icon slot="icon" style="padding-right:10px;display:block;" type="code"/>
+        <x-icon slot="icon" style="padding-right:10px;display:block;" type="code-download"/>
       </cell>
       <cell title="工单回执" link="/reList">
         <x-icon slot="icon" style="padding-right:10px;display:block;" type="code-working"/>
-      </cell>
-      <cell title="工单回执" link="/reList">
-        <x-icon slot="icon" style="padding-right:10px;display:block;" type="code-download"/>
       </cell>
       <div @click="refresh">
         <cell title="参数更新" isLink>
