@@ -1,6 +1,8 @@
 <template>
   <div>
-    <x-header style="background-color:#F33A55;" title="回执提交"/>
+    <x-header style="background-color:#F33A55;" title="回执提交">
+      <div slot="right" @click="receiptClick">批量</div>
+    </x-header>
     <search ref="search" placeholder="搜索" :auto-fixed="false"
             @on-cancel="searchClear" @on-change="searchChange" @on-clear="searchClear"/>
     <group v-for="(item, index) in results" @click.native="showInfo(item)"
@@ -60,6 +62,14 @@
               ...value.params,
               details: Object.keys(value.devNos).map(key => ({devType: key}))
             },
+            type: 'show'
+          }
+        })
+      },
+      receiptClick: function () {
+        this.$router.push({
+          name: 'loBatch', params: {
+            list: this.list,
             type: 'show'
           }
         })

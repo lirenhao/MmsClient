@@ -8,6 +8,7 @@ import Allocate from '../views/allocate/allocate'
 import ReList from '../views/receipt/list'
 import Receipt from '../views/receipt/receipt'
 import LoList from '../views/local/list'
+import LoBatch from '../views/local/batch'
 
 Vue.use(Router)
 
@@ -95,6 +96,17 @@ export default new Router({
       meta: {
         isShowNav: true,
         title: '回执列表',
+        showBack: true
+      }
+    },
+    {
+      path: '/loBatch',
+      name: 'loBatch',
+      component: LoBatch,
+      props: true,
+      meta: {
+        isShowNav: true,
+        title: '批量回执',
         showBack: true
       }
     },
