@@ -15,7 +15,7 @@
   import api from '../../api'
 
   export default {
-    name: "receiptList",
+    name: "reList",
     components: {
       XHeader,
       Search,

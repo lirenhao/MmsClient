@@ -8,6 +8,9 @@
       <cell title="工单回执" link="/reList">
         <x-icon slot="icon" style="padding-right:10px;display:block;" type="code-working"/>
       </cell>
+      <cell title="本地上传" link="/loList">
+        <x-icon slot="icon" style="padding-right:10px;display:block;" type="code-working"/>
+      </cell>
       <div @click="refresh">
         <cell title="参数更新" isLink>
           <x-icon slot="icon" style="padding-right:10px;display:block;" type="android-refresh"/>

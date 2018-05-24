@@ -13,7 +13,7 @@
   import api from '../../api'
 
   export default {
-    name: "list",
+    name: "alList",
     components: {
       XHeader,
       WorkInfo

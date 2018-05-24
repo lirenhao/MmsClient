@@ -7,6 +7,7 @@ import AlShow from '../views/allocate/show'
 import Allocate from '../views/allocate/allocate'
 import ReList from '../views/receipt/list'
 import Receipt from '../views/receipt/receipt'
+import LoList from '../views/local/list'
 
 Vue.use(Router)
 
@@ -83,6 +84,17 @@ export default new Router({
       meta: {
         isShowNav: true,
         title: '回执',
+        showBack: true
+      }
+    },
+    {
+      path: '/loList',
+      name: 'loList',
+      component: LoList,
+      props: true,
+      meta: {
+        isShowNav: true,
+        title: '回执列表',
         showBack: true
       }
     },
