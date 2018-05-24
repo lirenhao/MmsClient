@@ -2,19 +2,32 @@
   <div>
     <x-header style="background-color:#F33A55;" title="首页" :left-options="{showBack: false}"></x-header>
     <group>
-      <div @click="refresh">
-        <cell title="参数更新" isLink>
+      <div @click="refresh" class="weui-cell vux-tap-active weui-cell_access">
+        <div class="weui-cell__hd">
           <x-icon slot="icon" style="padding-right:10px;display:block;" type="android-refresh"/>
-        </cell>
+        </div>
+        <div class="vux-cell-bd vux-cell-primary">参数更新</div>
+        <div class="weui-cell__ft">
+          <slot name="value"></slot>
+        </div>
       </div>
-      <cell title="工单管理" link="/list">
-        <x-icon slot="icon" style="padding-right:10px;display:block;" type="filing"/>
-      </cell>
-      <cell title="工单回执" link="/reList">
+      <cell title="工单派发" link="/list">
         <x-icon slot="icon" style="padding-right:10px;display:block;" type="code-download"/>
       </cell>
-      <cell title="本地上传" link="/loList">
+      <cell title="工单回执" link="/reList">
         <x-icon slot="icon" style="padding-right:10px;display:block;" type="code-working"/>
+      </cell>
+      <div @click="downReceipt" class="weui-cell vux-tap-active weui-cell_access">
+        <div class="weui-cell__hd">
+          <x-icon slot="icon" style="padding-right:10px;display:block;" type="ios-cloud-download-outline"/>
+        </div>
+        <div class="vux-cell-bd vux-cell-primary">任务下载</div>
+        <div class="weui-cell__ft">
+          <slot name="value"></slot>
+        </div>
+      </div>
+      <cell title="任务上传" link="/loList">
+        <x-icon slot="icon" style="padding-right:10px;display:block;" type="ios-cloud-upload-outline"/>
       </cell>
     </group>
   </div>
@@ -33,7 +46,10 @@
     methods: {
       refresh() {
         api.getParams()
-      }
+      },
+      downReceipt: function () {
+        api.getWorkReList()
+      },
     }
   }
 </script>

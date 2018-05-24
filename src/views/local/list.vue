@@ -1,7 +1,7 @@
 <template>
   <div>
     <x-header style="background-color:#F33A55;" title="回执提交">
-      <div slot="right" @click="receiptClick">批量</div>
+      <div slot="right" @click="receiptClick">批量选择</div>
     </x-header>
     <search ref="search" placeholder="搜索" :auto-fixed="false"
             @on-cancel="searchClear" @on-change="searchChange" @on-clear="searchClear"/>

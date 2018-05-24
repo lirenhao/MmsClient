@@ -39,44 +39,11 @@
             onButtonClick: () => {
               api.getAlTermList(item.id)
                 .then(data => {
-                  // TODO 路由到详情
                   this.$router.push({
                     name: 'allocate', params: {
                       info: item,
                       list: data,
                       type: 'allocate'
-                    }
-                  })
-                })
-            }
-          },
-          {
-            style: 'primary',
-            text: '审核',
-            onButtonClick: () => {
-              api.getWorkInfoShow(item.id)
-                .then(data => {
-                  // TODO 路由到详情
-                  this.$router.push({
-                    name: 'show', params: {
-                      info: data,
-                      type: 'audit'
-                    }
-                  })
-                })
-            }
-          },
-          {
-            style: 'primary',
-            text: '回执',
-            onButtonClick: () => {
-              api.getWorkInfoShow(item.id)
-                .then(data => {
-                  // TODO 路由到详情
-                  this.$router.push({
-                    name: 'show', params: {
-                      info: data,
-                      type: 'receipt'
                     }
                   })
                 })

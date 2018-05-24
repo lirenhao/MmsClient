@@ -212,6 +212,23 @@ export default {
           })
         }
       })
+      .then(data => {
+        localforage(window.localStorage.id).getItem('work')
+          .then(ld => {
+            ld = ld || {}
+            data.forEach(item => {
+              ld[item.workId + item.termNo] = item
+            })
+            localforage(window.localStorage.id).setItem('work', ld)
+          })
+          .then(() => {
+            Vue.$vux.toast.show({
+              type: 'success',
+              position: 'default',
+              text: '下载成功'
+            })
+          })
+      })
   },
   workReceipt: function (data, images = [], devNos = {}) {
     const params = new FormData();

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header style="background-color:#F33A55;" title="回执列表"/>
+    <x-header style="background-color:#F33A55;" title="回执列表"></x-header>
     <search ref="search" placeholder="搜索" :auto-fixed="false"
             @on-cancel="searchClear" @on-change="searchChange" @on-clear="searchClear"/>
     <div v-for="item in results">
@@ -12,6 +12,7 @@
 <script>
   import {XHeader, Search} from 'vux'
   import ExtInfo from '../../components/ExtInfo'
+  import localforage from '../../store/localforage'
   import api from '../../api'
 
   export default {
@@ -22,12 +23,13 @@
       ExtInfo
     },
     created: function () {
-      api.getWorkReList()
-        .then(data => {
-          this.list = data
-          this.results = data
+      localforage(window.localStorage.id).getItem('work')
+        .then(work => {
+          if (work) {
+            this.list = Object.values(work)
+            this.results = this.list
+          }
         })
-
     },
     data: function () {
       return {
@@ -49,27 +51,21 @@
             })
           }
         }
-        const showButton = {
+        const delButton = {
           style: 'primary',
-          text: '查看',
+          text: '删除',
           onButtonClick: () => {
-            api.getWorkInfoShow(item.id)
-              .then(data => {
-                this.$router.push({
-                  name: 'allocate', params: {
-                    info: data,
-                    type: 'show'
-                  }
-                })
+            localforage(window.localStorage.id).getItem('work')
+              .then(work => {
+                delete work[item.workId + item.termNo]
+                localforage(window.localStorage.id).setItem('work', work)
+                this.list = Object.values(work)
+                this.results = this.results
+                  .filter(value => (item.workId + item.termNo) !== (value.workId + value.termNo))
               })
           }
         }
-        const buttons = []
-        if (item.reviewStatus === "0")
-          buttons.push(reptButton)
-        if (item.receiptStatus === "1")
-          buttons.push(showButton)
-        return buttons
+        return [reptButton, delButton]
       },
       searchClear: function () {
         this.results = this.list

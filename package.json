@@ -12,6 +12,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "fastclick": "^1.0.6",
+    "isomorphic-form-data": "^1.0.0",
+    "localforage": "^1.7.1",
+    "localforage-cordovasqlitedriver": "^1.7.0",
+    "lrz": "^4.9.40",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^2.1.1",
