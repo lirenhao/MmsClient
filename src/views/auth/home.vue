@@ -110,6 +110,7 @@
     text-align: center;
     margin-left: 20%;
     line-height: 120px;
+    box-shadow: 2px 2px 16px rgb(213, 141, 69);
   }
   .vux-x-icon {
     fill: #Ffff;
