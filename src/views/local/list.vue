@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header style="background-color:#F33A55;" title="回执提交">
+    <x-header style="background-color:#F33A55;width:100%;position:fixed;left:0;top:0;z-index:100;" title="回执提交">
       <div slot="right" @click="receiptClick">批量选择</div>
     </x-header>
     <search ref="search" placeholder="搜索" :auto-fixed="false"

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header style="background-color:#F33A55;" title="回执列表"></x-header>
+    <x-header slot="header" style="background-color:#F33A55;width:100%;position:fixed;left:0;top:0;z-index:100;" title="回执列表"></x-header>
     <search ref="search" placeholder="搜索" :auto-fixed="false"
             @on-cancel="searchClear" @on-change="searchChange" @on-clear="searchClear"/>
     <div v-for="item in results">

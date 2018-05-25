@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header style="background-color:#F33A55;" title="工单派发">
+    <x-header style="background-color:#F33A55;width:100%;position:fixed;left:0;top:0;z-index:100;" title="工单派发">
       <div slot="right" @click="allocateClick">派发</div>
     </x-header>
     <search ref="search" placeholder="搜索" :auto-fixed="false"

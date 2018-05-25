@@ -1,7 +1,9 @@
 <template>
   <div id="app" style="height:100%;">
     <loading :show="isLoading"></loading>
-    <router-view></router-view>
+    <view-box :body-padding-top="isShowNav ? '46px' : '0'">
+      <router-view></router-view>
+    </view-box>
   </div>
 </template>
 
@@ -21,7 +23,7 @@
         isLoading: state => state.isLoading
       }),
       isShowNav() {
-        return this.$route.meta.isShowNav
+        return this.$route.name !== 'login'
       },
       title() {
         return this.$route.meta.title
