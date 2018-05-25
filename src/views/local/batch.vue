@@ -1,7 +1,7 @@
 <template>
   <div>
     <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true"
-              style="background-color:#F33A55;width:100%;position:absolute;left:0;top:0;z-index:100;" title="批量回执"/>
+              style="background-color:#D41919;width:100%;position:absolute;left:0;top:0;z-index:100;" title="批量回执"/>
     <actionsheet :menus="menus" v-model="showMenus"
                  @on-click-menu="receipt" show-cancel/>
     <search ref="search" placeholder="搜索" :auto-absolute="false"
