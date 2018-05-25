@@ -4,35 +4,37 @@
               title="首页" :left-options="{showBack: false}">
       <div slot="right" @click="logout">退出</div>
     </x-header>
-    <group>
-      <div @click="refresh" class="weui-cell vux-tap-active weui-cell_access">
-        <div class="weui-cell__hd">
-          <x-icon slot="icon" style="padding-right:10px;display:block;" type="android-refresh"/>
+    <div class="home-page">
+      <group>
+        <divhome-page @click="refresh" class="weui-cell vux-tap-active weui-cell_access">
+          <div class="weui-cell__hd">
+            <x-icon slot="icon" style="padding-right:10px;display:block;" type="android-refresh"/>
+          </div>
+          <div class="vux-cell-bd vux-cell-primary">参数更新</div>
+          <div class="weui-cell__ft">
+            <slot name="value"></slot>
+          </div>
+        </divhome-page>
+        <cell title="工单派发" link="/list">
+          <x-icon slot="icon" style="padding-right:10px;display:block;" type="code-download"/>
+        </cell>
+        <div @click="downReceipt" class="weui-cell vux-tap-active weui-cell_access">
+          <div class="weui-cell__hd">
+            <x-icon slot="icon" style="padding-right:10px;display:block;" type="ios-cloud-download-outline"/>
+          </div>
+          <div class="vux-cell-bd vux-cell-primary">任务下载</div>
+          <div class="weui-cell__ft">
+            <slot name="value"></slot>
+          </div>
         </div>
-        <div class="vux-cell-bd vux-cell-primary">参数更新</div>
-        <div class="weui-cell__ft">
-          <slot name="value"></slot>
-        </div>
-      </div>
-      <cell title="工单派发" link="/list">
-        <x-icon slot="icon" style="padding-right:10px;display:block;" type="code-download"/>
-      </cell>
-      <div @click="downReceipt" class="weui-cell vux-tap-active weui-cell_access">
-        <div class="weui-cell__hd">
-          <x-icon slot="icon" style="padding-right:10px;display:block;" type="ios-cloud-download-outline"/>
-        </div>
-        <div class="vux-cell-bd vux-cell-primary">任务下载</div>
-        <div class="weui-cell__ft">
-          <slot name="value"></slot>
-        </div>
-      </div>
-      <cell title="工单回执" link="/reList">
-        <x-icon slot="icon" style="padding-right:10px;display:block;" type="code-working"/>
-      </cell>
-      <cell title="任务上传" link="/loList">
-        <x-icon slot="icon" style="padding-right:10px;display:block;" type="ios-cloud-upload-outline"/>
-      </cell>
-    </group>
+        <cell title="工单回执" link="/reList">
+          <x-icon slot="icon" style="padding-right:10px;display:block;" type="code-working"/>
+        </cell>
+        <cell title="任务上传" link="/loList">
+          <x-icon slot="icon" style="padding-right:10px;display:block;" type="ios-cloud-upload-outline"/>
+        </cell>
+      </group>
+    </div>
   </div>
 </template>
 <script>
@@ -67,6 +69,17 @@
   }
 </script>
 
+
 <style scoped>
+  /*登陆大背景*/
+  .home-page {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 46px);
+    background: url("../../assets/home-bg.jpg") no-repeat;
+    background-size: cover;
+
+  }
+
 
 </style>
