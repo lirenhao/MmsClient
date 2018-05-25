@@ -42,6 +42,12 @@ axios.interceptors.response.use(
         default:
           console.log(err.response.status, err.response.data)
       }
+    } else {
+      Vue.$vux.toast.show({
+        type: 'warn',
+        position: 'default',
+        text: '网络异常'
+      })
     }
     return Promise.reject(err)
   })
