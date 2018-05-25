@@ -6,35 +6,35 @@
     </x-header>
     <div class="home-page">
       <div class="menu">
-        <div class="menu-half">
+        <div class="menu-half" @click="refresh">
           <div class="menu-round green-bg">
             <x-icon size="48" slot="icon" type="android-refresh"/>
           </div>
           <div class="menu-name">参数更新</div>
         </div>
 
-        <div class="menu-half">
+        <div class="menu-half" @click="downReceipt">
           <div class="menu-round">
-            <x-icon size="50" slot="icon" type="ios-cloud-download-outline"/>
+            <x-icon size="50" slot="icon" type="ios-cloud-download"/>
           </div>
           <div class="menu-name">任务下载</div>
         </div>
 
-        <div class="menu-half">
+        <div class="menu-half" @click="goLink('/reList')">
           <div class="menu-round purple-bg">
             <x-icon size="50" slot="icon" type="code-working"/>
           </div>
           <div class="menu-name">工单回执</div>
         </div>
 
-        <div class="menu-half">
+        <div class="menu-half" @click="goLink('/loList')">
           <div class="menu-round orange-bg">
-            <x-icon size="50" slot="icon" type="ios-cloud-upload-outline"/>
+            <x-icon size="50" slot="icon" type="ios-cloud-upload"/>
           </div>
           <div class="menu-name">任务上传</div>
         </div>
 
-        <div class="menu-half">
+        <div class="menu-half" @click="goLink('/list')">
           <div class="menu-round blue-bg">
           <x-icon size="50" slot="icon" type="code-download"/>
         </div>
@@ -45,6 +45,7 @@
   </div>
 </template>
 <script>
+  import {} from 'vue-router'
   import {XHeader, Group, Cell} from 'vux'
   import api from '../../api'
 
@@ -72,10 +73,12 @@
       downReceipt() {
         api.getWorkReList()
       },
+      goLink(path) {
+        this.$router.push(path)
+      }
     }
   }
 </script>
-
 
 <style scoped>
   /*登陆大背景*/
