@@ -2,10 +2,14 @@
   <div>
     <div>
       <div class="login-input">
-        <x-input title="用户" v-model="userName" placeholder="用户名"/>
+        <x-input title="用户" v-model="userName" placeholder="用户名">
+          <x-icon slot="label" type="person"/>
+        </x-input>
       </div>
       <div class="login-input">
-        <x-input title="密码" v-model="passWord" placeholder="密码" type="password"/>
+        <x-input title="密码" v-model="passWord" placeholder="密码" type="password">
+          <x-icon slot="label" type="locked"/>
+        </x-input>
       </div>
       <x-button @click.native="click" type="primary" text="登 录"/>
       <div v-if="isClear">
