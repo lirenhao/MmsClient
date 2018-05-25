@@ -14,7 +14,7 @@
       <datetime v-model="completeDate" format="YYYY-MM-DD" title="完成时间"/>
     </group>
     <group title="回执图片">
-      <uploader :images="images" :max="4"/>
+      <uploader :images.sync="images" :max="4"/>
     </group>
   </div>
 </template>

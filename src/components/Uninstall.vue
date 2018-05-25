@@ -11,7 +11,7 @@
       </cell>
     </group>
     <group title="回执图片">
-      <uploader :images="images" :max="4"/>
+      <uploader :images.sync="images" :max="4"/>
     </group>
     <group>
       <flexbox>

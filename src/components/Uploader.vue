@@ -13,7 +13,7 @@
         <div class="vux-upload-bg">
           <div class="weui-uploader__input-box vux-upload-content">
             <input ref="file" class="weui-uploader__input" type="file"
-                   accept="image/*" capture="capture" @change="onChange">
+                   accept="image/*" capture="camera" @change="onChange">
           </div>
         </div>
       </flexbox-item>
@@ -33,14 +33,10 @@
       FlexboxItem,
       Previewer
     },
-    model: {
-      prop: 'images',
-      event: 'change'
-    },
     props: {
       max: {
         type: Number,
-        default: 10
+        default: 4
       },
       span: {
         type: Number,
@@ -48,7 +44,7 @@
       },
       images: {
         type: Array,
-        default: () => []
+        default: []
       }
     },
     methods: {
@@ -56,16 +52,15 @@
         // 移动端仅支持单文件上传
         const reader = new FileReader();
         reader.onload = (e) => {
-          this.images.push(e.target.result);
+          this.$emit('update:images', [...this.images, e.target.result])
         }
         reader.readAsDataURL(event.target.files[0])
       },
       onPreview(index) {
-        console.log(this.$refs.previewer)
         this.$refs.previewer.show(index)
       },
       onRemove(index) {
-        this.images = this.images.filter((value, key) => index = key)
+        this.$emit('update:images', this.images.filter((value, key) => index = key))
       }
     }
   }
