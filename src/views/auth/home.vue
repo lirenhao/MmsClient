@@ -15,30 +15,30 @@
 
         <div class="menu-half">
           <div class="menu-round">
-            <x-icon size="50" slot="icon" type="code-download"/>
-          </div>
-          <div class="menu-name">工单派发</div>
-        </div>
-
-        <div class="menu-half">
-          <div class="menu-round purple-bg">
             <x-icon size="50" slot="icon" type="ios-cloud-download-outline"/>
           </div>
           <div class="menu-name">任务下载</div>
         </div>
 
         <div class="menu-half">
-          <div class="menu-round orange-bg">
+          <div class="menu-round purple-bg">
             <x-icon size="50" slot="icon" type="code-working"/>
           </div>
           <div class="menu-name">工单回执</div>
         </div>
 
         <div class="menu-half">
-          <div class="menu-round blue-bg">
+          <div class="menu-round orange-bg">
             <x-icon size="50" slot="icon" type="ios-cloud-upload-outline"/>
           </div>
           <div class="menu-name">任务上传</div>
+        </div>
+
+        <div class="menu-half">
+          <div class="menu-round blue-bg">
+          <x-icon size="50" slot="icon" type="code-download"/>
+        </div>
+          <div class="menu-name">工单派发</div>
         </div>
       </div>
     </div>
