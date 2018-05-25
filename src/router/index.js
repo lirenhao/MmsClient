@@ -15,15 +15,16 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/login',
       name: 'login',
       component: Login,
+      props: true,
       meta: {
         isShowNav: false
       }
     },
     {
-      path: '/home',
+      path: '/',
       name: 'home',
       component: Home,
       props: true,

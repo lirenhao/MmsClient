@@ -8,6 +8,9 @@
         <x-input title="密码" v-model="passWord" placeholder="密码" type="password"/>
       </div>
       <x-button @click.native="click" type="primary" text="登 录"/>
+      <div v-if="isClear">
+        <x-icon @click.native="clear" type="close"></x-icon>
+      </div>
     </div>
   </div>
 </template>
@@ -22,6 +25,12 @@
       XButton,
       XInput
     },
+    props: {
+      isClear: {
+        type: Boolean,
+        default: true
+      }
+    },
     data: function () {
       return {
         userName: '',
@@ -29,7 +38,7 @@
       }
     },
     methods: {
-      click: function () {
+      click() {
         const userName = this.$data.userName
         const passWord = this.$data.passWord
         if (userName !== '' && passWord !== '') {
@@ -41,6 +50,9 @@
             text: '请输入用户名或密码'
           })
         }
+      },
+      clear() {
+        this.$router.go(-1)
       }
     }
   }

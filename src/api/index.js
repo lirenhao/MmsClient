@@ -69,9 +69,7 @@ export default {
           if (resp.data.respCode === '00') {
             window.localStorage.setItem('id', resp.data.content.id)
             window.localStorage.setItem('token', resp.data.content.token)
-            router.push({
-              name: 'home'
-            })
+            router.go(-1)
             this.getParams()
           } else {
             store.commit('UPDATE_LOADING', false)

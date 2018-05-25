@@ -1,6 +1,8 @@
 <template>
   <div>
-    <x-header style="background-color:#F33A55;" title="首页" :left-options="{showBack: false}"></x-header>
+    <x-header style="background-color:#F33A55;" title="首页" :left-options="{showBack: false}">
+      <div slot="right" @click="logout">退出</div>
+    </x-header>
     <group>
       <div @click="refresh" class="weui-cell vux-tap-active weui-cell_access">
         <div class="weui-cell__hd">
@@ -43,11 +45,21 @@
       Group,
       Cell
     },
+    created: function () {
+      if (!window.localStorage.token) {
+        this.$router.push({name: 'login', params: {isClear: false}})
+      } else {
+        // TODO 权限判断
+      }
+    },
     methods: {
+      logout() {
+        this.$router.push({name: 'login'})
+      },
       refresh() {
         api.getParams()
       },
-      downReceipt: function () {
+      downReceipt() {
         api.getWorkReList()
       },
     }

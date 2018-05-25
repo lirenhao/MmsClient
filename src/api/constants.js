@@ -1,4 +1,4 @@
-export const CONTEXT = 'http://localhost:8080/mobile'
+export const CONTEXT = 'http://10.2.53.166:8080/mobile'
 
 //用户登录
 export const LOGIN = CONTEXT + '/auth/login'
