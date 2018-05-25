@@ -12,7 +12,7 @@
           <x-icon slot="label" type="ios-locked" />
         </x-input>
       </div>
-      <x-button class="Mobile-login-btn" @click.native="click" type="primary" text="登 录"/>
+      <x-button class="login-btn" @click.native="click" text="登 录"/>
       <div v-if="isClear">
         <x-icon @click.native="clear" type="close"></x-icon>
       </div>
@@ -91,7 +91,6 @@
     border-radius: 28px;
   }
 
-
   /*登录页输入框宽度调整*/
   .text-box {
     font-size: 13px;
@@ -99,7 +98,7 @@
     text-indent: .3em;
   }
   /*登录按钮*/
-  .Mobile-login-btn {
+  .login-btn {
     width: 66%;
     height: 42px;
     margin-left: 17%;
@@ -111,18 +110,4 @@
     border-radius: 28px;
     text-align: center;
   }
-
-  /*登录界面错误弹出按钮*/
-  .button--Mobile-error-btn {
-    background: none;
-    color: #dd3623;
-    font-size: 14px;
-    border: 1px solid #dd3623;
-    border-radius: 8px;
-    width: 100px;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-top: 30px;
-  }
-
 </style>
