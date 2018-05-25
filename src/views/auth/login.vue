@@ -1,17 +1,18 @@
 <template>
-  <div>
+  <div class="login-bg">
+    <img class="logo" src="../../assets/boc-logo.png">
     <div>
       <div class="login-input">
-        <x-input title="用户" v-model="userName" placeholder="用户名">
-          <x-icon slot="label" type="person"/>
+        <x-input class="text-box" title="用户" v-model="userName" placeholder="请输入用户名">
+          <x-icon slot="label" type="person" />
         </x-input>
       </div>
       <div class="login-input">
-        <x-input title="密码" v-model="passWord" placeholder="密码" type="password">
-          <x-icon slot="label" type="locked"/>
+        <x-input class="text-box" title="密码" v-model="passWord" placeholder="请输入密码" type="password">
+          <x-icon slot="label" type="ios-locked" />
         </x-input>
       </div>
-      <x-button @click.native="click" type="primary" text="登 录"/>
+      <x-button class="Mobile-login-btn" @click.native="click" type="primary" text="登 录"/>
       <div v-if="isClear">
         <x-icon @click.native="clear" type="close"></x-icon>
       </div>
@@ -66,9 +67,11 @@
   /*登陆大背景*/
   .login-bg {
     position: absolute;
-    z-index: -99;
     width: 100%;
     height: 100%;
+    background: url("../../assets/login-bg.jpg") no-repeat;
+    background-size: cover;
+
   }
 
   /*登陆页logo*/
@@ -79,7 +82,7 @@
     margin-bottom: 30px;
   }
 
-  login-input {
+  .login-input {
     width: 80%;
     margin-left: 10%;
     background: #fff;
@@ -88,19 +91,38 @@
     border-radius: 28px;
   }
 
-  /*登陆页输入框 图标*/
-  .login-input .ons-icon {
-    position: absolute;
-    margin-left: 18px;
-    margin-top: 8px;
-    font-size: 26px;
-    color: #888;
-  }
 
   /*登录页输入框宽度调整*/
-  .login-input x-input {
-    width: calc(100% - 50px);
-    margin-left: 46px;
-    border-bottom: 0;
+  .text-box {
+    font-size: 13px;
+    padding: 8px 15px !important;
+    text-indent: .3em;
   }
+  /*登录按钮*/
+  .Mobile-login-btn {
+    width: 66%;
+    height: 42px;
+    margin-left: 17%;
+    background: #dd3623;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 56px;
+    border-radius: 28px;
+    text-align: center;
+  }
+
+  /*登录界面错误弹出按钮*/
+  .button--Mobile-error-btn {
+    background: none;
+    color: #dd3623;
+    font-size: 14px;
+    border: 1px solid #dd3623;
+    border-radius: 8px;
+    width: 100px;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 30px;
+  }
+
 </style>
