@@ -91,7 +91,7 @@
     float: left;
     width: 70%;
     margin-left: 15%;
-    margin-top: 33px;
+    margin-top: 66px;
   }
   .menu-half {
     float: left;

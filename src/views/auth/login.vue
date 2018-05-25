@@ -13,8 +13,8 @@
         </x-input>
       </div>
       <x-button class="login-btn" @click.native="click" text="登 录"/>
-      <div v-if="isClear">
-        <x-icon @click.native="clear" type="close"></x-icon>
+      <div class="close-btn" v-if="isClear">
+        <x-icon style="fill: #Ffff; position: fixed; top: 20px; right: 20px; " @click.native="clear" type="close"></x-icon>
       </div>
     </div>
   </div>
@@ -78,7 +78,7 @@
   .logo {
     width: 38%;
     margin-left: 31%;
-    margin-top: 50px;
+    margin-top: 70px;
     margin-bottom: 30px;
   }
 
