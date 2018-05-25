@@ -1,6 +1,10 @@
 <template>
   <div>
-    <group title="回执信息">
+    <group title="回执内容">
+      <div class="weui-form-preview__ft">
+        <button class="weui-form-preview__btn" @click="buttonSave">保存</button>
+        <button class="weui-form-preview__btn" @click="buttonSubmit">提交</button>
+      </div>
       <selector title="装机位置变化" direction="rtl" v-model="isAddress"
                 :options="[{key: '0', value: '否'}, {key: '1', value: '是'}]"/>
       <datetime v-model="completeDate" format="YYYY-MM-DD" title="完成时间"/>
@@ -13,27 +17,17 @@
     <group title="回执图片">
       <uploader :images.sync="images" :max="4"/>
     </group>
-    <group>
-      <flexbox>
-        <flexbox-item v-if="isSave">
-          <x-button @click.native="buttonClick">保存</x-button>
-        </flexbox-item>
-        <flexbox-item>
-          <x-button @click.native="buttonClick">提交</x-button>
-        </flexbox-item>
-      </flexbox>
-    </group>
   </div>
 </template>
 
 <script>
-  import {Group, Cell, Selector, Datetime, XInput, XButton, Flexbox, FlexboxItem} from 'vux'
+  import {Group, Cell, Selector, Datetime} from 'vux'
   import Uploader from './Uploader'
 
   export default {
     name: "Uninstall",
     components: {
-      Group, Cell, Selector, Datetime, Uploader, XInput, XButton, Flexbox, FlexboxItem
+      Group, Cell, Selector, Datetime, Uploader
     },
     created: function () {
       let now = new Date()

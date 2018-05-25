@@ -6,8 +6,6 @@ export const LOGIN = CONTEXT + '/auth/login'
 export const PARAMS = CONTEXT + "/workInfo/params"
 //工单列表
 export const WORK_INFO_LIST = CONTEXT + '/workInfo/list'
-//工单展示
-export const WORK_INFO_SHOW = CONTEXT + '/workInfo/show'
 //终端列表
 export const WORK_TERM_LIST = CONTEXT + '/workInfo/termList'
 //用户列表

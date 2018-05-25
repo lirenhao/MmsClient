@@ -43,6 +43,11 @@
     },
     methods: {
       submit(params, images, devNos) {
+        params.workId = this.info.workId
+        params.merNo = this.info.merNo
+        params.termNo = this.info.termNo
+        params.eventsId = this.info.eventsId
+        params.addr = this.info.addr
         api.workReceipt(params, images, devNos)
       },
       save(params, images, devNos) {

@@ -20,14 +20,14 @@
 </template>
 
 <script>
-  import {Group, Cell, Selector, Datetime, XButton, Flexbox, FlexboxItem} from 'vux'
+  import {Group, Cell, Selector, Datetime} from 'vux'
   import Uploader from './Uploader'
   import localforage from '../store/localforage'
 
   export default {
     name: "Inspect",
     components: {
-      Group, Cell, Selector, Datetime, Uploader, XButton, Flexbox, FlexboxItem
+      Group, Cell, Selector, Datetime, Uploader
     },
     created: function () {
       let now = new Date()

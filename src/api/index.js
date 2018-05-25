@@ -135,24 +135,6 @@ export default {
         }
       })
   },
-  getWorkInfoShow: function (id) {
-    const params = new URLSearchParams()
-    params.append('workId', id)
-    return axios.post(consts.WORK_INFO_SHOW, params)
-      .then(resp => {
-        console.log(resp)
-        const data = resp.data
-        if (data.respCode === '00') {
-          return data.content
-        } else {
-          Vue.$vux.toast.show({
-            type: 'warn',
-            position: 'default',
-            text: data.respMsg
-          })
-        }
-      })
-  },
   getAlTermList: function (workId) {
     const params = new URLSearchParams()
     params.append('workId', workId)
@@ -201,7 +183,18 @@ export default {
         console.log(resp)
         const data = resp.data
         if (data.respCode === '00') {
-          return data.content
+          const work = {}
+          data.content.forEach(item => {
+            work[item.workId + item.termNo] = item
+          })
+          localforage(window.localStorage.id).setItem('work', work)
+            .then(() => {
+              Vue.$vux.toast.show({
+                type: 'success',
+                position: 'default',
+                text: '下载成功'
+              })
+            })
         } else {
           Vue.$vux.toast.show({
             type: 'warn',
@@ -209,23 +202,6 @@ export default {
             text: data.respMsg
           })
         }
-      })
-      .then(data => {
-        localforage(window.localStorage.id).getItem('work')
-          .then(ld => {
-            ld = ld || {}
-            data.forEach(item => {
-              ld[item.workId + item.termNo] = item
-            })
-            localforage(window.localStorage.id).setItem('work', ld)
-          })
-          .then(() => {
-            Vue.$vux.toast.show({
-              type: 'success',
-              position: 'default',
-              text: '下载成功'
-            })
-          })
       })
   },
   workReceipt: function (data, images = [], devNos = {}) {
@@ -244,11 +220,27 @@ export default {
       .then(resp => {
         console.log(resp)
         if (resp.data.respCode === '00') {
-          Vue.$vux.toast.show({
-            type: 'success',
-            position: 'default',
-            text: '回执成功'
-          })
+          // 成功后删除本地
+          localforage(window.localStorage.id).getItem('receipt')
+            .then(ld => {
+              ld = ld || {}
+              delete ld[data.workId + data.termNo]
+              localforage(window.localStorage.id).setItem('receipt', ld)
+            })
+            .then(() => {
+              Vue.$vux.toast.show({
+                type: 'success',
+                position: 'default',
+                text: '回执成功'
+              })
+            })
+            .catch(() => {
+              Vue.$vux.toast.show({
+                type: 'success',
+                position: 'default',
+                text: '回执失败'
+              })
+            })
         } else {
           Vue.$vux.toast.show({
             type: 'warn',
@@ -273,7 +265,7 @@ export default {
           text: '保存成功'
         })
       })
-      .catch(err => {
+      .catch(() => {
         Vue.$vux.toast.show({
           type: 'success',
           position: 'default',
