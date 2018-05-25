@@ -3,6 +3,12 @@ node_modules/
 dist/
 npm-debug.log
 yarn-error.log
+package-lock.json
+
+hooks/
+platforms/
+plugins/
+www/
 
 # Editor directories and files
 .idea
