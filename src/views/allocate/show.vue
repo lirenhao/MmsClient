@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header style="background-color:#F33A55;width:100%;position:fixed;left:0;top:0;z-index:100;" :title="getTitle"/>
+    <x-header style="background-color:#F33A55;width:100%;position:absolute;left:0;top:0;z-index:100;" :title="getTitle"/>
     <work-info :item="info" :clicks="[]"/>
     <div v-for="item in info.workInfoExt">
       <group :title="item.merNo">

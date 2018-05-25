@@ -1,9 +1,9 @@
 <template>
   <div>
-    <x-header style="background-color:#F33A55;width:100%;position:fixed;left:0;top:0;z-index:100;" title="回执提交">
+    <x-header style="background-color:#F33A55;width:100%;position:absolute;left:0;top:0;z-index:100;" title="回执提交">
       <div slot="right" @click="receiptClick">批量选择</div>
     </x-header>
-    <search ref="search" placeholder="搜索" :auto-fixed="false"
+    <search ref="search" placeholder="搜索" :auto-absolute="false"
             @on-cancel="searchClear" @on-change="searchChange" @on-clear="searchClear"/>
     <group v-for="(item, index) in results" @click.native="showInfo(item)"
            :title="getTitle(item.params.eventsId)" :key="index">

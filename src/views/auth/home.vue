@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header style="background-color:#F33A55;width:100%;position:fixed;left:0;top:0;z-index:100;"
+    <x-header style="background-color:#F33A55;width:100%;position:absolute;left:0;top:0;z-index:100;"
               title="首页" :left-options="{showBack: false}">
       <div slot="right" @click="logout">退出</div>
     </x-header>

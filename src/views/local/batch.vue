@@ -1,10 +1,10 @@
 <template>
   <div>
     <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true"
-              style="background-color:#F33A55;width:100%;position:fixed;left:0;top:0;z-index:100;" title="批量回执"/>
+              style="background-color:#F33A55;width:100%;position:absolute;left:0;top:0;z-index:100;" title="批量回执"/>
     <actionsheet :menus="menus" v-model="showMenus"
                  @on-click-menu="receipt" show-cancel/>
-    <search ref="search" placeholder="搜索" :auto-fixed="false"
+    <search ref="search" placeholder="搜索" :auto-absolute="false"
             @on-cancel="searchClear" @on-change="searchChange" @on-clear="searchClear"/>
     <popup-header left-text="全选" right-text="反选" title="选择任务"
                   @on-click-left="selectAll" @on-click-right="selectOther"/>
