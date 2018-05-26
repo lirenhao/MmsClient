@@ -75,6 +75,7 @@ export default {
         if (resp.status === 200) {
           if (resp.data.respCode === '00') {
             window.localStorage.setItem('id', resp.data.content.id)
+            window.localStorage.setItem('role', resp.data.content.role)
             window.localStorage.setItem('token', resp.data.content.token)
             router.go(-1)
             this.getParams()

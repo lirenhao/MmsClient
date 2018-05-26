@@ -34,7 +34,7 @@
           <div class="menu-name">任务上传</div>
         </div>
 
-        <div class="menu-half" @click="goLink('/list')">
+        <div v-if="isManager" class="menu-half" @click="goLink('/list')">
           <div class="menu-round blue-bg">
           <x-icon size="50" slot="icon" type="code-download"/>
         </div>
@@ -45,7 +45,6 @@
   </div>
 </template>
 <script>
-  import {} from 'vue-router'
   import {XHeader, Group, Cell} from 'vux'
   import api from '../../api'
 
@@ -60,7 +59,12 @@
       if (!window.localStorage.token) {
         this.$router.push({name: 'login', params: {isClear: false}})
       } else {
-        // TODO 权限判断
+        this.isManager = window.localStorage.role === 'true'
+      }
+    },
+    data: function() {
+      return {
+        isManager: false
       }
     },
     methods: {
