@@ -57,7 +57,7 @@
     methods: {
       allocateSubmit: function () {
         console.log(this.info)
-        api.workAllocate(this.info.id, this.userId, this.checkValues)
+        api.workAllocate(this.info.workId, this.userId, this.checkValues)
           .then(() => {
             this.$vux.toast.show({
               type: 'success',

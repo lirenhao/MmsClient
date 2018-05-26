@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Login from '../views/auth/login'
 import Home from '../views/auth/home'
 import AlList from '../views/allocate/list'
-import AlShow from '../views/allocate/show'
 import Allocate from '../views/allocate/allocate'
 import ReList from '../views/receipt/list'
 import Receipt from '../views/receipt/receipt'
@@ -42,17 +41,6 @@ export default new Router({
       meta: {
         isShowNav: true,
         title: '列表',
-        showBack: true
-      }
-    },
-    {
-      path: '/show',
-      name: 'show',
-      component: AlShow,
-      props: true,
-      meta: {
-        isShowNav: true,
-        title: '详情',
         showBack: true
       }
     },

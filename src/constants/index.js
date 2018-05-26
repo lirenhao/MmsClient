@@ -12,12 +12,6 @@ export const workStatus = {
   ['0']: "未完成",
   ['1']: "已完成",
 }
-// 回执复核状态
-export const checkStatus = {
-  ['0']: "未审核",
-  ['1']: "审核通过",
-  ['2']: "审核驳回",
-}
 // 回执状态
 export const receiptStatus = {
   ['0']: "待回执",

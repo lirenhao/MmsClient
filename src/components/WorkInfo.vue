@@ -1,5 +1,5 @@
 <template>
-  <form-preview header-label="工单单号" :header-value="item.id"
+  <form-preview header-label="工单单号" :header-value="item.workId"
                 :body-items="parserItem(item)" :footer-buttons="clicks"/>
 </template>
 
