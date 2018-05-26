@@ -1,15 +1,17 @@
 <template>
-  <div>
+  <div style="height:100%;">
     <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true"
-              style="background-color:#D41919;width:100%;position:absolute;left:0;top:0;z-index:100;" title="批量回执"/>
+              style="width:100%;position:absolute;left:0;top:0;z-index:100;" title="批量回执"/>
     <actionsheet :menus="menus" v-model="showMenus"
                  @on-click-menu="receipt" show-cancel/>
-    <search ref="search" placeholder="搜索" :auto-absolute="false"
-            @on-cancel="searchClear" @on-change="searchChange" @on-clear="searchClear"/>
-    <popup-header left-text="全选" right-text="反选" title="选择任务"
-                  @on-click-left="selectAll" @on-click-right="selectOther"/>
-    <checklist label-position="left"
-               :options="checkOptions" v-model="checkValues"/>
+    <view-box>
+      <search placeholder="搜索" :auto-fixed="false"
+              @on-cancel="searchClear" @on-change="searchChange" @on-clear="searchClear"/>
+      <popup-header left-text="全选" right-text="反选" title="选择任务"
+                    @on-click-left="selectAll" @on-click-right="selectOther"/>
+      <checklist label-position="left"
+                 :options="checkOptions" v-model="checkValues"/>
+    </view-box>
   </div>
 </template>
 

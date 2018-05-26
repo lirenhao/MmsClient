@@ -5,7 +5,7 @@ const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 const vuxLoader = require('vux-loader')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
@@ -74,9 +74,13 @@ module.exports = vuxLoader.merge(webpackConfig, {
     'vux-ui',
     'progress-bar',
     {
+      name: 'less-theme',
+      path: 'src/styles/theme.less' // 相对项目根目录路径
+    },
+    {
       name: 'duplicate-style',
       options: {
-        cssProcessorOptions : {
+        cssProcessorOptions: {
           safe: true,
           zindex: false,
           autoprefixer: {

@@ -1,28 +1,30 @@
 <template>
-  <div>
-    <x-header style="background-color:#D41919;width:100%;position:absolute;left:0;top:0;z-index:100;" title="工单派发">
+  <div style="height:100%;">
+    <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;" title="工单派发">
       <div slot="right" @click="allocateClick">派发</div>
     </x-header>
-    <search ref="search" placeholder="搜索" :auto-absolute="false"
-            @on-cancel="searchClear" @on-change="searchChange" @on-clear="searchClear"/>
-    <popup-header left-text="全选" right-text="反选" title="选择终端"
-                  @on-click-left="selectAll" @on-click-right="selectOther"/>
-    <checklist label-position="left"
-               :options="checkOptions" v-model="checkValues"/>
-    <div>
-      <popup v-model="showUser">
-        <popup-header
-          left-text="取消"
-          right-text="确定"
-          title="选择执行人"
-          :show-bottom-border="false"
-          @on-click-left="showUser = false"
-          @on-click-right="allocateSubmit"></popup-header>
-        <group gutter="0">
-          <radio v-model="userId" :options="userOptions"></radio>
-        </group>
-      </popup>
-    </div>
+    <view-box>
+      <search placeholder="搜索" :auto-fixed="false"
+              @on-cancel="searchClear" @on-change="searchChange" @on-clear="searchClear"/>
+      <popup-header left-text="全选" right-text="反选" title="选择终端"
+                    @on-click-left="selectAll" @on-click-right="selectOther"/>
+      <checklist label-position="left"
+                 :options="checkOptions" v-model="checkValues"/>
+      <div>
+        <popup v-model="showUser">
+          <popup-header
+            left-text="取消"
+            right-text="确定"
+            title="选择执行人"
+            :show-bottom-border="false"
+            @on-click-left="showUser = false"
+            @on-click-right="allocateSubmit"></popup-header>
+          <group gutter="0">
+            <radio v-model="userId" :options="userOptions"></radio>
+          </group>
+        </popup>
+      </div>
+    </view-box>
   </div>
 </template>
 

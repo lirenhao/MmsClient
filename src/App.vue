@@ -8,13 +8,12 @@
 </template>
 
 <script>
-  import {ViewBox, XHeader, Loading} from 'vux'
+  import {XHeader, Loading} from 'vux'
   import {mapState} from 'vuex'
 
   export default {
     name: 'app',
     components: {
-      ViewBox,
       XHeader,
       Loading
     },

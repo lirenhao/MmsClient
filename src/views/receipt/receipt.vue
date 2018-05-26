@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header style="background-color:#D41919;width:100%;position:absolute;left:0;top:0;z-index:100;" title="工单回执"/>
+    <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;" title="工单回执"/>
     <group :title="title">
       <cell title="终端号" :value="info.termNo"></cell>
       <!--<cell-form-preview list="list"></cell-form-preview>-->

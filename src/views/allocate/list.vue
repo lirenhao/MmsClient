@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header style="background-color:#D41919;width:100%;position:absolute;left:0;top:0;z-index:100;" title="工单列表"/>
+    <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;" title="工单列表"/>
     <div v-for="item in list">
       <work-info :item="item" :clicks="getButtons(item)"/>
     </div>

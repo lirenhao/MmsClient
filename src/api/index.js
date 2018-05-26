@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import 'es6-promise/auto'
 import axios from 'axios'
 import store from '../vuex/store'
 import router from '../router'
