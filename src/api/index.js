@@ -65,7 +65,7 @@ const dataURItoBlob = (dataURI) => {
 }
 
 export default {
-  login: function (userName, passWord) {
+  login(userName, passWord) {
     const params = new URLSearchParams()
     params.append('loginName', userName)
     params.append('pwd', passWord)
@@ -104,7 +104,7 @@ export default {
         })
       })
   },
-  getParams: function () {
+  getParams() {
     return axios.post(consts.PARAMS)
       .then((resp) => {
         const data = resp.data
@@ -126,7 +126,7 @@ export default {
         }
       })
   },
-  getWorkInfoList: function () {
+  getWorkInfoList() {
     return axios.post(consts.WORK_INFO_LIST)
       .then((resp) => {
         console.log(resp)
@@ -142,7 +142,7 @@ export default {
         }
       })
   },
-  getAlTermList: function (workId) {
+  getAlTermList(workId) {
     const params = new URLSearchParams()
     params.append('workId', workId)
     return axios.post(consts.WORK_TERM_LIST, params)
@@ -159,7 +159,7 @@ export default {
         }
       })
   },
-  getAlUserList: function () {
+  getAlUserList() {
     return axios.post(consts.WORK_USER_LIST)
       .then(resp => {
         console.log(resp)
@@ -174,7 +174,7 @@ export default {
         }
       })
   },
-  workAllocate: function (workId, userId, termNos) {
+  workAllocate(workId, userId, termNos) {
     const params = new URLSearchParams()
     params.append('workId', workId)
     params.append('userId', userId)
@@ -184,7 +184,7 @@ export default {
         console.log(resp)
       })
   },
-  getWorkReList: function () {
+  getWorkReList() {
     return axios.post(consts.WORK_RECEIPT_LIST)
       .then((resp) => {
         console.log(resp)
@@ -211,19 +211,19 @@ export default {
         }
       })
   },
-  workReceipt: function (data, images = [], devNos = {}) {
-    const params = new FormData();
-    Object.keys(data).forEach(key => {
-      params.append(key, data[key])
+  workReceipt(params, images = [], devNos = {}) {
+    const data = new FormData();
+    Object.keys(params).forEach(key => {
+      data.append(key, params[key])
     })
     images.forEach((img, index) => {
-      params.append('images', dataURItoBlob(img), data.termNo + '-' + index)
+      data.append('images', dataURItoBlob(img), params.termNo + '-' + index)
     })
     Object.keys(devNos).forEach(key => {
-      params.append('devTypes', key)
-      params.append('devNos', devNos[key])
+      data.append('devTypes', key)
+      data.append('devNos', devNos[key])
     })
-    return axios.post(consts.WORK_INFO_RECEIPT, params)
+    return axios.post(consts.WORK_INFO_RECEIPT, data)
       .then(resp => {
         console.log(resp)
         if (resp.data.respCode === '00') {
@@ -231,8 +231,8 @@ export default {
           localforage(window.localStorage.id).getItem('receipt')
             .then(ld => {
               ld = ld || {}
-              delete ld[data.workId + data.termNo]
-              localforage(window.localStorage.id).setItem('receipt', ld)
+              delete ld[params.workId + params.termNo]
+              return localforage(window.localStorage.id).setItem('receipt', ld)
             })
             .then(() => {
               Vue.$vux.toast.show({
@@ -252,18 +252,17 @@ export default {
           Vue.$vux.toast.show({
             type: 'warn',
             position: 'default',
-            text: resp.data.respMsg
+            text: resp.data.content
           })
         }
       })
   },
-  saveReceipt: function (params, images = [], devNos = {}) {
-    const id = window.localStorage.id
-    localforage(id).getItem('receipt')
+  saveReceipt(params, images = [], devNos = {}) {
+    localforage(window.localStorage.id).getItem('receipt')
       .then(ld => {
         ld = ld || {}
         ld[params.workId + params.termNo] = {params, images, devNos}
-        localforage(id).setItem('receipt', ld)
+        localforage(window.localStorage.id).setItem('receipt', ld)
       })
       .then(() => {
         Vue.$vux.toast.show({
@@ -278,6 +277,41 @@ export default {
           position: 'default',
           text: '保存失败'
         })
+      })
+  },
+  batchReceipt(ids) {
+    return localforage(window.localStorage.id).getItem('receipt')
+      .then(ld => Promise.all(ids.map(id => {
+        const params = ld[id].params
+        const images = ld[id].images
+        const devNos = ld[id].devNos
+        const data = new FormData();
+        Object.keys(params).forEach(key => {
+          data.append(key, params[key])
+        })
+        images.forEach((img, index) => {
+          data.append('images', dataURItoBlob(img), params.termNo + '-' + index)
+        })
+        Object.keys(devNos).forEach(key => {
+          data.append('devTypes', key)
+          data.append('devNos', devNos[key])
+        })
+        return axios.post(consts.WORK_INFO_RECEIPT, data)
+      })))
+      .then(resp => {
+        return localforage(window.localStorage.id).getItem('receipt')
+          .then(ld => {
+            ld = ld || {}
+            resp.filter(item => item.data.respCode === '00')
+              .forEach(item => delete ld[item.data.content])
+            localforage(window.localStorage.id).setItem('receipt', ld)
+            return resp
+              .filter(item => item.data.respCode !== '00')
+              .map(item => ({
+                msg: item.data.respMsg,
+                termNo: ld[item.data.content].params.termNo
+              }))
+          })
       })
   }
 }
