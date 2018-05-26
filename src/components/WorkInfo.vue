@@ -17,6 +17,7 @@
       parserItem: function (item) {
         const body = []
         body.push({label: '事件', value: consts.eventType[item.eventsId]})
+        body.push({label: '商户号', value: item.merNo})
         body.push({label: '发布时间', value: item.createDate})
         body.push({label: '截止日期', value: item.endDate})
         body.push({label: '工单状态', value: consts.workStatus[item.workStatus]})
