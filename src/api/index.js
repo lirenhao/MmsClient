@@ -253,7 +253,7 @@ export default {
           Vue.$vux.toast.show({
             type: 'warn',
             position: 'default',
-            text: resp.data.content
+            text: resp.data.respMsg
           })
         }
       })

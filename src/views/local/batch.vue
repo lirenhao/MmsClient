@@ -57,20 +57,19 @@
             api.batchReceipt(this.checkValues)
               .then(error => {
                 if (error.length > 0) {
-                  // TODO 失败处理
                   this.$vux.toast.show({
                     type: 'warn',
                     position: 'default',
-                    text: '回执失败'
+                    text: `有${error.length}个任务回执失败`
                   })
                 } else {
-                  this.$router.go(-1)
                   this.$vux.toast.show({
                     type: 'success',
                     position: 'default',
                     text: '回执成功'
                   })
                 }
+                this.$router.go(-1)
               })
           } else if (menu === 'del') {
             localforage(window.localStorage.id).getItem('receipt')
