@@ -37,7 +37,7 @@
             style: 'primary',
             text: '派发',
             onButtonClick: () => {
-              api.getAlTermList(item.id)
+              api.getAlTermList(item.workId)
                 .then(data => {
                   this.$router.push({
                     name: 'allocate', params: {
