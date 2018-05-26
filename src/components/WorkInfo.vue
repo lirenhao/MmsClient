@@ -16,11 +16,9 @@
     methods: {
       parserItem: function (item) {
         const body = []
-        body.push({label: '事件', value: item.eventsId})
+        body.push({label: '事件', value: consts.eventType[item.eventsId]})
         body.push({label: '发布时间', value: item.createDate})
-        body.push({label: '工作完成截止日期', value: item.endDate})
-        body.push({label: '提交回执状态', value: item.receiptStatus})
-        body.push({label: '回执复核状态', value: consts.checkStatus[item.checkStatus]})
+        body.push({label: '截止日期', value: item.endDate})
         body.push({label: '工单状态', value: consts.workStatus[item.workStatus]})
         return body
       }
