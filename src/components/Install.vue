@@ -1,10 +1,6 @@
 <template>
   <div>
     <group title="回执内容">
-      <div class="weui-form-preview__ft">
-        <button class="weui-form-preview__btn" @click="buttonSave">保存</button>
-        <button class="weui-form-preview__btn" @click="buttonSubmit">提交</button>
-      </div>
       <selector title="装机位置变化" direction="rtl" v-model="isAddress"
                 :options="[{key: '0', value: '否'}, {key: '1', value: '是'}]"/>
       <selector title="程序编号" direction="rtl" v-model="programName"
@@ -18,6 +14,12 @@
     </group>
     <group title="回执图片">
       <uploader :images.sync="images" :max="4"/>
+    </group>
+    <group>
+      <div class="weui-form-preview__ft">
+        <button class="weui-form-preview__btn" @click="buttonSave">保存</button>
+        <button class="weui-form-preview__btn" @click="buttonSubmit">提交</button>
+      </div>
     </group>
   </div>
 </template>

@@ -1,10 +1,6 @@
 <template>
   <div>
     <group title="回执内容">
-      <div class="weui-form-preview__ft">
-        <button class="weui-form-preview__btn" @click="buttonSave">保存</button>
-        <button class="weui-form-preview__btn" @click="buttonSubmit">提交</button>
-      </div>
       <selector title="巡检结果" direction="rtl" v-model="inspectionResult"
                 :options="insResults" :value-map="['inspectionResultId', 'inspectionResultName']"/>
       <selector title="异常原因" direction="rtl" v-model="anomalyReason"
@@ -15,6 +11,12 @@
     </group>
     <group title="回执图片">
       <uploader :images.sync="images" :max="4"/>
+    </group>
+    <group>
+      <div class="weui-form-preview__ft">
+        <button class="weui-form-preview__btn" @click="buttonSave">保存</button>
+        <button class="weui-form-preview__btn" @click="buttonSubmit">提交</button>
+      </div>
     </group>
   </div>
 </template>
