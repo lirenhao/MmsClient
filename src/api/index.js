@@ -236,6 +236,14 @@ export default {
               return localforage(window.localStorage.id).setItem('receipt', ld)
             })
             .then(() => {
+              localforage(window.localStorage.id).getItem('work')
+                .then(ld => {
+                  ld = ld || {}
+                  delete ld[params.workId + params.termNo]
+                  return localforage(window.localStorage.id).setItem('work', ld)
+                })
+            })
+            .then(() => {
               Vue.$vux.toast.show({
                 type: 'success',
                 position: 'default',
