@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div style="height:100%;">
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;" title="工单列表"/>
     <view-box>
-      <search placeholder="搜索" :auto-fixed="false"
+      <search slot="header" placeholder="搜索" :auto-fixed="false"
               @on-cancel="searchClear" @on-change="searchChange" @on-clear="searchClear"/>
       <div v-for="item in results">
         <work-info :item="item" :clicks="getButtons(item)"/>

@@ -15,7 +15,6 @@
   import {XHeader, Search} from 'vux'
   import ExtInfo from '../../components/ExtInfo'
   import localforage from '../../store/localforage'
-  import api from '../../api'
 
   export default {
     name: "reList",
