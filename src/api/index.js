@@ -241,6 +241,7 @@ export default {
                 position: 'default',
                 text: '回执成功'
               })
+              router.go(-1)
             })
             .catch(() => {
               Vue.$vux.toast.show({
@@ -271,6 +272,7 @@ export default {
           position: 'default',
           text: '保存成功'
         })
+        router.go(-1)
       })
       .catch(() => {
         Vue.$vux.toast.show({
