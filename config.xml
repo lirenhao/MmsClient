@@ -2,11 +2,11 @@
 <widget id="com.yada.mms" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>MMS</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
-    </description>
+    A sample Apache Cordova application that responds to the deviceready event.
+  </description>
     <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
-    </author>
+    Apache Cordova Team
+  </author>
     <content src="index.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <access origin="*" />
@@ -22,6 +22,10 @@
             <uses-permission android:name="android.permission.CAMERA" />
         </config-file>
         <allow-intent href="market:*" />
+        <icon density="ldpi" src="res/icon/android/icon-36-ldpi.png" />
+        <icon density="mdpi" src="res/icon/android/icon-48-mdpi.png" />
+        <icon density="hdpi" src="res/icon/android/icon-72-hdpi.png" />
+        <icon density="xhdpi" src="res/icon/android/icon-96-xhdpi.png" />
     </platform>
     <platform name="ios">
         <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
@@ -38,11 +42,15 @@
         </edit-config>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+        <icon height="57" src="res/icon/ios/icon-57.png" width="57" />
+        <icon height="114" src="res/icon/ios/icon-57-2x.png" width="114" />
+        <icon height="72" src="res/icon/ios/icon-72.png" width="72" />
+        <icon height="144" src="res/icon/ios/icon-72-2x.png" width="144" />
     </platform>
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
     <preference name="phonegap-version" value="cli-8.0.0" />
     <plugin name="cordova-plugin-sqlite-2" spec="^1.0.5" />
-    <engine name="android" spec="^7.1.0" />
+    <engine name="android" spec="^7.0.0" />
     <engine name="ios" spec="^4.5.4" />
 </widget>

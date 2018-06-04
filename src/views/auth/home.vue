@@ -2,7 +2,7 @@
   <div>
     <x-header style="width:100%;position:absolute;left:0;top:0;z-index:100;"
               title="首页" :left-options="{showBack: false}">
-      <div slot="right" @click="logout">退出</div>
+      <div slot="right" @click="logout">切换用户</div>
     </x-header>
     <div class="home-page">
       <div class="menu">
