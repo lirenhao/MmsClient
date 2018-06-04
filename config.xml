@@ -22,10 +22,10 @@
             <uses-permission android:name="android.permission.CAMERA" />
         </config-file>
         <allow-intent href="market:*" />
-        <icon density="ldpi" src="res/icon/android/icon-36-ldpi.png" />
-        <icon density="mdpi" src="res/icon/android/icon-48-mdpi.png" />
-        <icon density="hdpi" src="res/icon/android/icon-72-hdpi.png" />
-        <icon density="xhdpi" src="res/icon/android/icon-96-xhdpi.png" />
+        <icon density="ldpi" src="res/icon/android/logoAndroidIcon_36pt.png" />
+        <icon density="mdpi" src="res/icon/android/logoAndroidIcon_36pt@1.3x.png" />
+        <icon density="hdpi" src="res/icon/android/logoAndroidIcon_36pt@2x.png" />
+        <icon density="xhdpi" src="res/icon/android/logoAndroidIcon_36pt@2.7x.png" />
     </platform>
     <platform name="ios">
         <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
@@ -42,10 +42,11 @@
         </edit-config>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-        <icon height="57" src="res/icon/ios/icon-57.png" width="57" />
-        <icon height="114" src="res/icon/ios/icon-57-2x.png" width="114" />
-        <icon height="72" src="res/icon/ios/icon-72.png" width="72" />
-        <icon height="144" src="res/icon/ios/icon-72-2x.png" width="144" />
+        <icon height="40" src="res/icon/ios/logoiPhoneNotification_20pt@2x.png" width="40" />
+        <icon height="60" src="res/icon/ios/logoiPhoneNotification_20pt@3x.png" width="60" />
+        <icon height="80" src="res/icon/ios/logoiPhoneSpootlight7_40pt@2x.png" width="80" />
+        <icon height="120" src="res/icon/ios/logoiPhoneApp_60pt@2x.png" width="120" />
+        <icon height="180" src="res/icon/ios/logoiPhoneApp_60pt@3x.png" width="180" />
     </platform>
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
