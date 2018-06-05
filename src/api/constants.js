@@ -1,4 +1,4 @@
-export const CONTEXT = 'http://10.2.53.13:8090/newMMS/mobile'
+export const CONTEXT = 'https://www.yadadev.com/mms/mobile'
 
 //用户登录
 export const LOGIN = CONTEXT + '/auth/login'

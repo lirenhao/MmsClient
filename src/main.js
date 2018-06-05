@@ -4,6 +4,7 @@ import FastClick from 'fastclick'
 import store from './vuex/store'
 import router from './router'
 import App from './App'
+import 'url-search-params-polyfill'
 
 Vue.use(AjaxPlugin)
 Vue.use(ToastPlugin)
